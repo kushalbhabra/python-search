@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World!</string>
-    <string name="app_name">Dummy Script</string>
-    <string name="loading">Dummy Script loading...</string>
+    <string name="app_name">Meow</string>
+    <string name="loading">Search loading...</string>
 </resources>

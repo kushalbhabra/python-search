@@ -2,7 +2,7 @@ import android
 import exceptions
 import os
 import time
-
+import codecs
 
 droid=android.Android()
 
@@ -17,24 +17,44 @@ def eventloop():
 					droid.fullDismiss()
 					return
 				if id=="btn_crawl":
-					droid.fullSetProperty("btn_crawl","text","Crawling...")
+					
 					path=droid.fullQueryDetail("tv_path").result['text']      #path from user
 					search=droid.fullQueryDetail("tv_keyword").result['text']   #keyword from user
 					results=[]
-
-					for j in os.walk(path):
+					
+					#FILE EXTENSIONS
+					title = 'Select File extensions'
+					droid.dialogCreateAlert(title)
+					ext_options=['.java', '.txt', '.py','.sh','.html','.php']
+					droid.dialogSetMultiChoiceItems(ext_options, [])
+					droid.dialogSetPositiveButtonText('Ok')
+					droid.dialogShow()
+					response=droid.dialogGetResponse().result
+					ext=[]
+					indexes = droid.dialogGetSelectedItems()[1] # 1 is for getting indices
+					if indexes==ext:			#empty
+						
+						break
+					for index in indexes:
+						ext.append(ext_options[index])
+			
+					ext=tuple(ext) 
+					
+					droid.fullSetProperty("btn_crawl","text","Crawling...")
+					for j in os.walk(path): #recursive traversal in given path
 						for k in j[2]:
-							try:            
-								f = open(j[0]+'/'+k,"rb")
-								if search in f.read() :
-									results.append(j[0]+k)
-									droid.fullSetList("listView1",results)
-								f.close()
-							except Exception:
-								droid.fullSetProperty("btn_crawl","text","Done.")
-								time.sleep(2)
-								droid.fullSetProperty("btn_crawl","text","Crawl!")
-								eventloop()
+							if k.lower().endswith(ext):
+								try:         
+									f = open(j[0]+'/'+k,"r")
+									droid.fullSetProperty("btn_crawl","text",j[0]+k)
+									if search in f.read().decode('UTF-8','ignore') or search in k:
+										results.append(j[0]+k)
+										droid.fullSetList("listView1",results)
+								except Exception as e:
+									droid.fullSetProperty("btn_crawl","text",str(e))
+									eventloop()
+								finally:
+									f.close()							
 					droid.fullSetProperty("btn_crawl","text","Done.")
 					time.sleep(2)
 					droid.fullSetProperty("btn_crawl","text","Crawl!")

@@ -2,13 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+	android:background="#aa000000">
+
+    <Button
+        android:id="@+id/btn_exit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_menu_close_clear_cancel" 
+        android:layout_gravity="right"/>
 
     <EditText
         android:id="@+id/tv_path"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:hint="Path eg./sdcard/myfolder">
+        android:layout_height="wrap_content"         
+		android:text="/mnt/sdcard/">
 		
         <requestFocus />
     </EditText>
@@ -17,14 +25,20 @@
         android:id="@+id/tv_keyword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
-        android:hint="Keyword eg.book"/>
-
-    <Button
-        android:id="@+id/tv_crawl"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="CRAWL BABY CRAWL!"
-         />
+        android:hint="keyword"/>
+
+
+			<Button
+	        android:id="@+id/btn_crawl"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:text="Crawl!"
+	        android:textColor="#ffffffff"
+	        android:background="#ff880077"
+	         />
+
+    
+
 
     <ListView
         android:id="@+id/listView1"

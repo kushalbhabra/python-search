@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/tv_path"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:hint="Path eg./sdcard/myfolder">
+		
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/tv_keyword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:hint="Keyword eg.book"/>
+
+    <Button
+        android:id="@+id/tv_crawl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="CRAWL BABY CRAWL!"
+         />
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+</LinearLayout>
